@@ -1,0 +1,6 @@
+output/
+
+### IntelliJ IDEA ###
+.idea
+*.iml
+

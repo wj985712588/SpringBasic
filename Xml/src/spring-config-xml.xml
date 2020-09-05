@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--无参构造注册bean-->
+    <bean id="user" class="cn.mhonor.xml.entity.User">
+        <!--构造方法注入-->
+        <constructor-arg name="name" value="Mr.mhonor"/>
+        <constructor-arg name="age" value="26"/>
+        <constructor-arg name="friend" ref="friend"/>
+
+        <!--set方式注入-->
+        <!--1.简单数据类型注入（8个基本数据类型和String）-->
+        <property name="name" value="Mr.mhonor"/>
+        <property name="age" value="26"/>
+
+        <!--2.对象类型数据注入-->
+        <property name="enemy" ref="enemy"/>
+
+        <!--3.数组类型注入-->
+        <property name="arys">
+            <list>
+                <!--如果是对象类型则使用bean标签-->
+                <value>test1</value>
+                <value>test2</value>
+                <value>test3</value>
+            </list>
+        </property>
+
+        <!--4.List类型注入-->
+        <property name="lists">
+            <list>
+                <!--如果是对象类型则使用bean标签-->
+                <value>test1</value>
+                <value>test2</value>
+                <value>test3</value>
+            </list>
+        </property>
+
+        <!--5.Set类型注入-->
+        <property name="sets">
+            <set>
+                <!--如果是对象类型则使用bean标签-->
+                <value>test1</value>
+                <value>test2</value>
+                <value>test3</value>
+            </set>
+        </property>
+
+        <!--6.Map类型注入-->
+        <property name="maps">
+            <map>
+                <!--key如果是对象类型，则使用key-ref-->
+                <!--value如果是对象类型，则使用value-ref-->
+                <!--<entry key-ref="" value-ref="" value-type=""/>-->
+                <entry key="test1" value="test1"/>
+                <entry key="test2" value="test2"/>
+                <entry key="test3" value="test3"/>
+            </map>
+        </property>
+
+        <!--7.Properties类型注入-->
+        <property name="properties">
+            <props>
+                <prop key="test1">test1</prop>
+                <prop key="test2">test2</prop>
+                <prop key="test3">test3</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!--无参构造注册实例工厂bean-->
+    <bean id="instanceFactory" class="cn.mhonor.xml.factory.InstanceFactory">
+
+    </bean>
+
+    <!--实例工厂注册bean-->
+    <bean id="friend" factory-bean="instanceFactory" factory-method="createUser">
+
+    </bean>
+
+    <!--静态工厂注册bean-->
+    <bean id="enemy" class="cn.mhonor.xml.factory.StaticFactory " factory-method="createUser">
+
+    </bean>
+
+</beans>
